@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kosan_app/pages/home_page.dart';
-
+import 'package:kosan_app/providers/authentication.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -9,8 +9,8 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
 
-  String email = 'user@mail.com';
-  String password = '123456';
+  // String email = 'user@mail.com';
+  // String password = '123456';
   Color yellowColor = Color(0xffFFB942);
   TextEditingController emailController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
@@ -107,9 +107,16 @@ class _LoginPageState extends State<LoginPage> {
           ),
           RaisedButton(
             onPressed: () {
-              if (formKey.currentState.validate() && emailController.text.toString() == email) {
-                Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>HomePage()), (Route<dynamic> route)=>false);
-              }
+              // if (formKey.currentState.validate() && emailController.text.toString() == email {
+              AuthenticationHelper()
+                .signIn(email: emailController.text.toString(), password: passwordController.text.toString())
+                  .then((result) {
+                    if (result == null) {
+                      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>HomePage()), (Route<dynamic> route)=>false);
+                    }
+                });
+
+              // }
             },
             color: Colors.white,
             padding: EdgeInsets.symmetric(horizontal: 20),
