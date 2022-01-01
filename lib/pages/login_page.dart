@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kosan_app/pages/home_page.dart';
 import 'package:kosan_app/providers/authentication.dart';
+import 'package:kosan_app/pages/error_login.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -112,7 +113,9 @@ class _LoginPageState extends State<LoginPage> {
                 .signIn(email: emailController.text.toString(), password: passwordController.text.toString())
                   .then((result) {
                     if (result == null) {
-                      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>HomePage()), (Route<dynamic> route)=>false);
+                      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>HomePage(emailz: emailController.text.toString())), (Route<dynamic> route)=>false);
+                    } else {
+                      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>ErrorLogin()), (Route<dynamic> route)=>false);
                     }
                 });
 
@@ -139,7 +142,22 @@ class _LoginPageState extends State<LoginPage> {
                   color: Colors.white,
                   fontWeight: FontWeight.w400
               ),),
-              onPressed: (){},
+              onPressed: (){
+                AuthenticationHelper()
+                    .signUp(email: emailController.text.toString(), password: passwordController.text.toString())
+                    .then((result) {
+                  if (result == null) {
+                    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>HomePage(emailz: emailController.text.toString())), (Route<dynamic> route)=>false);
+                  } else {
+                    Scaffold.of(context).showSnackBar(SnackBar(
+                      content: Text(
+                        result,
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    ));
+                  }
+                });
+              },
             ),
           )
         ],

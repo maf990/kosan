@@ -11,9 +11,14 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
+
+  final String emailz;
+  HomePage({Key key, @required this.emailz}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     var spaceProvider = Provider.of<SpaceProvider>(context);
+
 
     return Scaffold(
       backgroundColor: whiteColor,
@@ -40,7 +45,7 @@ class HomePage extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(left: edge),
               child: Text(
-                'Mencari kosan yang cozy',
+                'Welcome' + emailz +'\nMencari kosan yang cozy',
                 style: greyTextStyle.copyWith(
                   fontSize: 16,
                 ),
