@@ -1,8 +1,8 @@
-import 'package:kosan_app/pages/home_page.dart';
+import 'package:kosan_app/pages/login_page.dart';
 import 'package:kosan_app/theme.dart';
 import 'package:flutter/material.dart';
 
-class ErrorPage extends StatelessWidget {
+class ErrorLogin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +29,7 @@ class ErrorPage extends StatelessWidget {
                 height: 14,
               ),
               Text(
-                'Seems like the page that you were\nrequested is already gone',
+                'Seems like the email that you were\nrequested is missing',
                 style: greyTextStyle.copyWith(
                   fontSize: 16,
                 ),
@@ -46,7 +46,7 @@ class ErrorPage extends StatelessWidget {
                     Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => HomePage(),
+                          builder: (context) => LoginPage(),
                         ),
                             (route) => false);
                   },
@@ -55,7 +55,7 @@ class ErrorPage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(17),
                   ),
                   child: Text(
-                    'Back to Home',
+                    'Back to Login',
                     style: whiteTextStyle.copyWith(
                       fontSize: 18,
                     ),
